@@ -1,4 +1,4 @@
-import { config, typeToImgMap, toolToType } from "./config/config.mjs";
+import { config } from "./config/config.mjs";
 import { random } from './modules/functions.mjs';
 
 const grid = document.getElementById("grid");
