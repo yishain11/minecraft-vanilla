@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.tile {
+  background-color: gray;
+  border: .2px solid rgb(255, 163, 163);
+  height: auto;
+  width: auto;
+}
+
+body {
+  display: flex;
+  align-items: center;
+}
+
+#app {
+  height: 90%;
+  width: 90%;
+  margin: auto;
+  background-color: red;
+  display: flex;
+}
+
+#tools {
+  flex-grow: 1;
+  background-color: green;
+}
+
+#grid {
+  flex-grow: 8;
+  background-color: blue;
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  grid-template-rows: repeat(20, 1fr);
+  gap: 0;
+}
