@@ -8,3 +8,8 @@ export const typeToImgMap = {
     sky: '/assets/tileTypes/sky_basic.png',
     tree: '/assets/tileTypes/tree_basic.png'
 };
+
+export const toolToType = {
+    axe: 'tree',
+    shovel: 'ground'
+};
