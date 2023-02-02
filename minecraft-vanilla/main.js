@@ -1,23 +1,11 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import { setupCounter } from './counter.js'
+import { config, typeToImgMap } from "./config/config.mjs";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const grid = document.getElementById("grid");
 
-setupCounter(document.querySelector('#counter'))
+for (let index = 0; index < config.numOfRows; index++) {
+  for (let j = 0; j < config.numOfCols; j++) {
+    const tile = document.createElement('div');
+    tile.classList.add('tile');
+    grid.append(tile);
+  }
+}
