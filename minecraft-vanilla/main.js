@@ -2,25 +2,66 @@ import { config } from "./config/config.mjs";
 import { random } from './modules/functions.mjs';
 
 const grid = document.getElementById("grid");
+const body = document.getElementsByTagName('body')[0];
+
 const shovelBtn = document.getElementById('shovel');
 const axeBtn = document.getElementById('axe');
-const body = document.getElementsByTagName('body')[0];
+const restartBtn = document.getElementById('restart')
+
 const treeCounter = document.getElementById('treeCounter');
 const groundCounter = document.getElementById('groundCounter');
+
+const treeImg = document.getElementById('treeImg');
+const groundImg = document.getElementById('groundImg')
+
+
 let currentTool;
 
-genTitles();
+loadGame();
+
+function loadGame() {
+  genTitles();
+  genListeners();
+}
+
+function genListeners() {
+  addInitialListener(shovelBtn, 'shovel');
+  addInitialListener(axeBtn, 'axe');
+  addInitialListener(treeImg, 'treeInventory');
+  addInitialListener(groundImg, 'groundInventory');
+  restartBtn.addEventListener('click', loadGame);
+}
 
 
-shovelBtn.addEventListener('click', () => {
-  body.style.cursor = 'url("' + '/assets/cursor/shovel.png' + '"), default';
-  currentTool = 'shovel';
-});
 
-axeBtn.addEventListener('click', () => {
-  body.style.cursor = 'url("' + '/assets/cursor/axe.png' + '"), default';
-  currentTool = 'axe';
-});
+function addInitialListener(el, type) {
+  switch (type) {
+    case 'axe':
+      el.addEventListener('click', () => {
+        body.style.cursor = 'url("' + '/assets/cursor/axe.png' + '"), default';
+        currentTool = 'axe';
+      });
+      break;
+    case 'shovel':
+      el.addEventListener('click', () => {
+        body.style.cursor = 'url("' + '/assets/cursor/shovel.png' + '"), default';
+        currentTool = 'shovel';
+      });
+      break;
+
+    case 'treeInventory':
+      el.addEventListener('click', () => {
+        body.style.cursor = 'url("' + '/assets/inventoryCursor/tree_basic.png' + '"), default';
+      });
+      break;
+    case 'groundInventory':
+      el.addEventListener('click', () => {
+        body.style.cursor = 'url("' + '/assets/inventoryCursor/ground_middle.png' + '"), default';
+      });
+      break;
+
+  }
+}
 
 function clickHandler(e) {
   const tile = e.target;
@@ -37,6 +78,7 @@ function clickHandler(e) {
 }
 
 function genTitles() {
+  grid.innerHTML = '';
   for (let index = 0; index < config.numOfRows; index++) {
     for (let j = 0; j < config.numOfCols; j++) {
       const tile = document.createElement('div');

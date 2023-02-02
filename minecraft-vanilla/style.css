@@ -8,12 +8,10 @@ html, body {
   width: 100%;
 }
 
-.tile {
-  background-color: gray;
-  border: .2px solid rgb(255, 163, 163);
-  height: auto;
-  width: auto;
+.sky:hover, .tree:hover, .ground:hover {
+  border: 2px solid darkorchid;
 }
+
 
 body {
   display: flex;
