@@ -4,7 +4,7 @@ export const config = {
 };
 
 export const typeToImgMap = {
-    ground: '',
-    sky: '',
-    tree: ''
+    ground: '/assets/tileTypes/ground_middle.png',
+    sky: '/assets/tileTypes/sky_basic.png',
+    tree: '/assets/tileTypes/tree_basic.png'
 };

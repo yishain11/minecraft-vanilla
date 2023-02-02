@@ -24,20 +24,37 @@ body {
   height: 90%;
   width: 90%;
   margin: auto;
-  background-color: red;
   display: flex;
 }
 
 #tools {
   flex-grow: 1;
   background-color: green;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+button {
+  height: 40%;
 }
 
 #grid {
   flex-grow: 8;
-  background-color: blue;
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(20, 1fr);
   gap: 0;
+}
+
+.ground {
+  background-image: url('/assets/tileTypes/ground_middle.png');
+}
+
+.sky {
+  background-image: url('/assets/tileTypes/sky_basic.png');
+}
+
+.tree {
+  background-image: url('/assets/tileTypes/tree_basic.png');
 }
