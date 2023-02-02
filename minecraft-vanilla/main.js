@@ -5,7 +5,8 @@ const grid = document.getElementById("grid");
 const shovelBtn = document.getElementById('shovel');
 const axeBtn = document.getElementById('axe');
 const body = document.getElementsByTagName('body')[0];
-
+const treeCounter = document.getElementById('treeCounter');
+const groundCounter = document.getElementById('groundCounter');
 let currentTool;
 
 genTitles();
@@ -27,9 +28,11 @@ function clickHandler(e) {
   if (currentTool === 'axe' && tileType.contains('tree')) {
     tile.classList.remove('tree');
     tile.classList.add('sky');
+    treeCounter.innerText = parseInt(treeCounter.innerText) + 1
   } else if (currentTool === 'shovel' && tileType.contains('ground')) {
     tile.classList.remove('ground');
     tile.classList.add('sky');
+    groundCounter.innerText = parseInt(groundCounter.innerText) + 1
   }
 }
 
