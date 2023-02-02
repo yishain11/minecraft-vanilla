@@ -16,6 +16,7 @@ const groundImg = document.getElementById('groundImg')
 
 
 let currentTool;
+let currentTileMaker;
 
 loadGame();
 
@@ -29,7 +30,11 @@ function genListeners() {
   addInitialListener(axeBtn, 'axe');
   addInitialListener(treeImg, 'treeInventory');
   addInitialListener(groundImg, 'groundInventory');
-  restartBtn.addEventListener('click', loadGame);
+  restartBtn.addEventListener('click', () => {
+    currentTool = '';
+    currentTileMaker = '';
+    loadGame();
+  });
 }
 
 
@@ -40,30 +45,40 @@ function addInitialListener(el, type) {
       el.addEventListener('click', () => {
         body.style.cursor = 'url("' + '/assets/cursor/axe.png' + '"), default';
         currentTool = 'axe';
+        currentTileMaker = '';
       });
       break;
     case 'shovel':
       el.addEventListener('click', () => {
         body.style.cursor = 'url("' + '/assets/cursor/shovel.png' + '"), default';
         currentTool = 'shovel';
+        currentTileMaker = '';
       });
       break;
 
     case 'treeInventory':
       el.addEventListener('click', () => {
-        body.style.cursor = 'url("' + '/assets/inventoryCursor/tree_basic.png' + '"), default';
+        if (parseInt(treeCounter.innerText) > 0) {
+          currentTileMaker = 'tree';
+          currentTool = '';
+          body.style.cursor = 'url("' + '/assets/inventoryCursor/tree_basic.png' + '"), default';
+        }
       });
       break;
     case 'groundInventory':
       el.addEventListener('click', () => {
-        body.style.cursor = 'url("' + '/assets/inventoryCursor/ground_middle.png' + '"), default';
+        if (parseInt(groundCounter.innerText) > 0) {
+          currentTool = '';
+          currentTileMaker = 'ground';
+          body.style.cursor = 'url("' + '/assets/inventoryCursor/ground_middle.png' + '"), default';
+        }
       });
       break;
 
   }
 }
 
-function clickHandler(e) {
+function tileClickHandler(e) {
   const tile = e.target;
   const tileType = tile.classList;
   if (currentTool === 'axe' && tileType.contains('tree')) {
@@ -74,6 +89,14 @@ function clickHandler(e) {
     tile.classList.remove('ground');
     tile.classList.add('sky');
     groundCounter.innerText = parseInt(groundCounter.innerText) + 1
+  } else if (tileType.contains('sky') && currentTileMaker === 'tree' && parseInt(treeCounter.innerText) > 0) {
+    tile.classList.add('tree');
+    tile.classList.remove('sky');
+    treeCounter.innerText = parseInt(treeCounter.innerText) - 1;
+  } else if (tileType.contains('sky') && currentTileMaker === 'ground' && parseInt(groundCounter.innerText) > 0) {
+    tile.classList.remove('sky');
+    tile.classList.add('ground');
+    groundCounter.innerText = parseInt(groundCounter.innerText) - 1
   }
 }
 
@@ -90,7 +113,7 @@ function genTitles() {
       } else {
         tile.classList.add('sky');
       }
-      tile.addEventListener('click', clickHandler)
+      tile.addEventListener('click', tileClickHandler)
       grid.append(tile);
     }
   }
